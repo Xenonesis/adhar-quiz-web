@@ -23,6 +23,15 @@ class QuizAnalytics {
   initEventListeners() {
     document.getElementById('theme-toggle').addEventListener('click', () => this.toggleTheme());
     document.getElementById('clear-data').addEventListener('click', () => this.clearAllData());
+    
+    // Mobile menu toggle functionality
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+    }
   }
 
   toggleTheme() {

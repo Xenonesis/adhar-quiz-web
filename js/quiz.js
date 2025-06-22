@@ -1,202 +1,309 @@
-const questions = [
-  {
-    question: "What is the full form of UIDAI?",
-    options: [
-      "A. Unique Identification Authority of India",
-      "B. Uniform Identity Authority of India",
-      "C. Universal ID Authority of India",
-      "D. Unique ID Audit of India"
-    ],
-    answer: "A"
-  },
-  {
-    question: "What does the Aadhaar number consist of?",
-    options: [
-      "A. 10 digits",
-      "B. 12 digits",
-      "C. 14 digits",
-      "D. 8 digits"
-    ],
-    answer: "B"
-  },
-  {
-    question: "Who can enroll for Aadhaar?",
-    options: [
-      "A. Only Indian citizens",
-      "B. Residents of India",
-      "C. Government employees",
-      "D. NRI only"
-    ],
-    answer: "B"
-  },
-  {
-    question: "Which of the following biometric details are captured during Aadhaar enrolment?",
-    options: [
-      "A. Fingerprints only",
-      "B. Iris scan only",
-      "C. Facial photograph only",
-      "D. Fingerprints, iris scan, and facial photograph"
-    ],
-    answer: "D"
-  },
-  {
-    question: "What is the age criteria for a resident to provide all biometric details during Aadhaar enrolment?",
-    options: [
-      "A. 3 years and above",
-      "B. 5 years and above",
-      "C. 7 years and above",
-      "D. 10 years and above"
-    ],
-    answer: "B"
-  },
-  {
-    question: "What type of device is used to capture fingerprints in Aadhaar enrolment?",
-    options: [
-      "A. Digital camera",
-      "B. Slap scanner",
-      "C. Retina scanner",
-      "D. Keyboard"
-    ],
-    answer: "B"
-  },
-  {
-    question: "Which software is used for Aadhaar enrolment?",
-    options: [
-      "A. Aadhaar Enrollment Lite",
-      "B. UID Client",
-      "C. ECMP",
-      "D. KYC Pro"
-    ],
-    answer: "C"
-  },
-  {
-    question: "Who can become an Aadhaar Operator/Supervisor?",
-    options: [
-      "A. Anyone with basic computer knowledge",
-      "B. Anyone above 18 years with 10+2 education and passed UIDAI certification exam",
-      "C. Any Aadhaar holder",
-      "D. Only government employees"
-    ],
-    answer: "B"
-  },
-  {
-    question: "How many fingerprints are taken during enrolment?",
-    options: [
-      "A. 5",
-      "B. 8",
-      "C. 10",
-      "D. 2"
-    ],
-    answer: "C"
-  },
-  {
-    question: "What should be the resolution of the facial image in Aadhaar?",
-    options: [
-      "A. 300 DPI",
-      "B. 250 DPI",
-      "C. 200 DPI",
-      "D. 600 DPI"
-    ],
-    answer: "A"
-  },
-  {
-    question: "What does ECMP stand for?",
-    options: [
-      "A. Enrolment Client Management Program",
-      "B. Electronic Control Mapping Protocol",
-      "C. Enrolment Client for Multi-Purpose",
-      "D. Enrolment and Capture Management Program"
-    ],
-    answer: "C"
-  },
-  {
-    question: "Which form is filled during Aadhaar enrolment?",
-    options: [
-      "A. UIDAI Application Form",
-      "B. Enrolment Form",
-      "C. KYC Form",
-      "D. Identity Verification Form"
-    ],
-    answer: "B"
-  },
-  {
-    question: "Which of the following is a valid PoI document?",
-    options: [
-      "A. PAN Card",
-      "B. Electricity Bill",
-      "C. Ration Card",
-      "D. Property Tax Receipt"
-    ],
-    answer: "A"
-  },
-  {
-    question: "Which of the following is a valid PoA document?",
-    options: [
-      "A. Voter ID",
-      "B. School Certificate",
-      "C. Passport",
-      "D. Driving License"
-    ],
-    answer: "C"
-  },
-  {
-    question: "How many iris scans are captured during Aadhaar enrolment?",
-    options: [
-      "A. 1",
-      "B. 2",
-      "C. 3",
-      "D. 0"
-    ],
-    answer: "B"
-  },
-  {
-    question: "What is the minimum age for becoming an Aadhaar Supervisor?",
-    options: [
-      "A. 16",
-      "B. 18",
-      "C. 21",
-      "D. 25"
-    ],
-    answer: "B"
-  },
-  {
-    question: "Who is responsible for quality check of enrolments?",
-    options: [
-      "A. Registrar",
-      "B. Operator",
-      "C. Supervisor",
-      "D. Resident"
-    ],
-    answer: "C"
-  },
-  {
-    question: "What should be the background for the photograph taken during enrolment?",
-    options: [
-      "A. White",
-      "B. Blue",
-      "C. Black",
-      "D. Green"
-    ],
-    answer: "A"
-  },
-  {
-    question: "What is the official UIDAI website?",
-    options: [
-      "A. [www.uidai.in](http://www.uidai.in)",
-      "B. [www.uidai.org](http://www.uidai.org)",
-      "C. [www.uidai.gov.in](http://www.uidai.gov.in)",
-      "D. [www.uidai.com](http://www.uidai.com)"
-    ],
-    answer: "C"
-  },
-  {
-    question: "Which authentication factor is NOT used by UIDAI?",
-    options: [
-      "A. OTP",
-      "B. Iris",
-      "C. DNA",
-      "D. Fingerprint"
-    ],
-    answer: "C"
+// Quiz Application with Gemini AI Integration
+class QuizApp {
+  constructor() {
+    this.questions = [];
+    this.currentQuestionIndex = 0;
+    this.userAnswers = [];
+    this.score = 0;
+    this.quizCompleted = false;
+    this.geminiGenerator = null;
+    
+    this.initializeElements();
+    this.initializeEventListeners();
+    this.initializeGemini();
   }
-];
+
+  initializeElements() {
+    this.quizContainer = document.getElementById('quiz');
+    this.progressBar = document.getElementById('progress-bar');
+    this.currentQuestionSpan = document.getElementById('current-question');
+    this.totalQuestionsSpan = document.getElementById('total-questions');
+    this.resetButton = document.getElementById('reset');
+    this.submitButton = document.getElementById('submit');
+    this.resultsContainer = document.getElementById('results');
+  }
+
+  initializeEventListeners() {
+    this.resetButton.addEventListener('click', () => this.resetQuiz());
+    this.submitButton.addEventListener('click', () => this.submitQuiz());
+  }
+
+  async initializeGemini() {
+    if (!isApiKeyConfigured()) {
+      this.showError(CONFIG.MESSAGES.NO_API_KEY);
+      this.showApiKeySetup();
+      return;
+    }
+
+    this.geminiGenerator = new GeminiQuizGenerator(CONFIG.GEMINI_API_KEY);
+    await this.loadQuestions();
+  }
+
+  showApiKeySetup() {
+    this.quizContainer.innerHTML = `
+      <div class="card">
+        <h3>🔑 API Key Setup Required</h3>
+        <p>To generate questions from Gemini AI, you need to:</p>
+        <ol>
+          <li>Get a free API key from <a href="https://makersuite.google.com/app/apikey" target="_blank">Google AI Studio</a></li>
+          <li>Open <code>js/config.js</code> file</li>
+          <li>Replace <code>YOUR_GEMINI_API_KEY_HERE</code> with your actual API key</li>
+          <li>Refresh this page</li>
+        </ol>
+        <div style="margin-top: 20px;">
+          <input type="text" id="temp-api-key" placeholder="Or paste your API key here temporarily" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px;">
+          <button onclick="quizApp.setTempApiKey()" class="btn-primary">Use This Key</button>
+        </div>
+      </div>
+    `;
+  }
+
+  setTempApiKey() {
+    const tempKey = document.getElementById('temp-api-key').value.trim();
+    if (tempKey) {
+      CONFIG.GEMINI_API_KEY = tempKey;
+      this.geminiGenerator = new GeminiQuizGenerator(tempKey);
+      this.loadQuestions();
+    }
+  }
+
+  async loadQuestions() {
+    try {
+      this.showLoading();
+      this.questions = await this.geminiGenerator.generateQuestions(
+        CONFIG.DEFAULT_TOPIC,
+        CONFIG.DEFAULT_QUESTION_COUNT,
+        CONFIG.DEFAULT_DIFFICULTY
+      );
+      
+      if (this.questions.length === 0) {
+        throw new Error('No valid questions generated');
+      }
+      
+      this.initializeQuiz();
+    } catch (error) {
+      console.error('Error loading questions:', error);
+      this.showError(CONFIG.MESSAGES.ERROR);
+    }
+  }
+
+  showLoading() {
+    this.quizContainer.innerHTML = `
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 48px; margin-bottom: 20px;">🤖</div>
+        <h3>${CONFIG.MESSAGES.LOADING}</h3>
+        <div style="margin: 20px 0;">
+          <div style="display: inline-block; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #4CAF50; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        </div>
+        <p>This may take a few moments...</p>
+      </div>
+    `;
+  }
+
+  showError(message) {
+    this.quizContainer.innerHTML = `
+      <div class="card" style="text-align: center; border-left: 4px solid #f44336;">
+        <div style="font-size: 48px; margin-bottom: 20px;">⚠️</div>
+        <h3>Error</h3>
+        <p>${message}</p>
+        <button onclick="location.reload()" class="btn-primary" style="margin-top: 20px;">Retry</button>
+      </div>
+    `;
+  }
+
+  initializeQuiz() {
+    this.currentQuestionIndex = 0;
+    this.userAnswers = [];
+    this.score = 0;
+    this.quizCompleted = false;
+    
+    this.totalQuestionsSpan.textContent = this.questions.length;
+    this.updateProgress();
+    this.displayQuestion();
+    this.resultsContainer.classList.add('hidden');
+  }
+
+  displayQuestion() {
+    if (this.currentQuestionIndex >= this.questions.length) {
+      this.submitQuiz();
+      return;
+    }
+
+    const question = this.questions[this.currentQuestionIndex];
+    const questionNumber = this.currentQuestionIndex + 1;
+
+    this.quizContainer.innerHTML = `
+      <div class="question-card card">
+        <div class="question">
+          <div class="question-number">${questionNumber}</div>
+          <div>${question.question}</div>
+        </div>
+        <div class="answers">
+          ${question.options.map((option, index) => `
+            <label>
+              <input type="radio" name="question-${this.currentQuestionIndex}" value="${String.fromCharCode(65 + index)}">
+              ${option}
+            </label>
+          `).join('')}
+        </div>
+        <div style="margin-top: 20px; text-align: center;">
+          ${this.currentQuestionIndex > 0 ? '<button onclick="quizApp.previousQuestion()" class="btn-secondary">Previous</button>' : ''}
+          <button onclick="quizApp.nextQuestion()" class="btn-primary" style="margin-left: 10px;">Next</button>
+        </div>
+      </div>
+    `;
+
+    // Add event listeners for answer selection
+    const radioButtons = this.quizContainer.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        this.userAnswers[this.currentQuestionIndex] = e.target.value;
+        // Add visual feedback
+        const labels = this.quizContainer.querySelectorAll('label');
+        labels.forEach(label => label.classList.remove('selected'));
+        e.target.closest('label').classList.add('selected');
+      });
+    });
+
+    // Restore previous answer if exists
+    if (this.userAnswers[this.currentQuestionIndex]) {
+      const previousAnswer = this.userAnswers[this.currentQuestionIndex];
+      const radioToCheck = this.quizContainer.querySelector(`input[value="${previousAnswer}"]`);
+      if (radioToCheck) {
+        radioToCheck.checked = true;
+        radioToCheck.closest('label').classList.add('selected');
+      }
+    }
+  }
+
+  nextQuestion() {
+    if (this.currentQuestionIndex < this.questions.length - 1) {
+      this.currentQuestionIndex++;
+      this.updateProgress();
+      this.displayQuestion();
+    }
+  }
+
+  previousQuestion() {
+    if (this.currentQuestionIndex > 0) {
+      this.currentQuestionIndex--;
+      this.updateProgress();
+      this.displayQuestion();
+    }
+  }
+
+  updateProgress() {
+    const progress = ((this.currentQuestionIndex + 1) / this.questions.length) * 100;
+    this.progressBar.style.width = `${progress}%`;
+    this.currentQuestionSpan.textContent = this.currentQuestionIndex + 1;
+  }
+
+  submitQuiz() {
+    if (this.quizCompleted) return;
+
+    this.calculateScore();
+    this.displayResults();
+    this.quizCompleted = true;
+  }
+
+  calculateScore() {
+    this.score = 0;
+    for (let i = 0; i < this.questions.length; i++) {
+      if (this.userAnswers[i] === this.questions[i].answer) {
+        this.score++;
+      }
+    }
+  }
+
+  displayResults() {
+    const percentage = Math.round((this.score / this.questions.length) * 100);
+    let grade = 'F';
+    let message = 'Keep practicing!';
+    
+    if (percentage >= 90) {
+      grade = 'A+';
+      message = 'Excellent work! 🎉';
+    } else if (percentage >= 80) {
+      grade = 'A';
+      message = 'Great job! 👏';
+    } else if (percentage >= 70) {
+      grade = 'B';
+      message = 'Good work! 👍';
+    } else if (percentage >= 60) {
+      grade = 'C';
+      message = 'Not bad, but you can do better! 💪';
+    } else if (percentage >= 50) {
+      grade = 'D';
+      message = 'You need more practice. 📚';
+    }
+
+    this.resultsContainer.innerHTML = `
+      <div class="card">
+        <h2>Quiz Results</h2>
+        <div style="text-align: center; margin: 20px 0;">
+          <div style="font-size: 72px; margin-bottom: 10px;">${grade}</div>
+          <div style="font-size: 24px; font-weight: 600; margin-bottom: 10px;">${percentage}%</div>
+          <div style="font-size: 18px; color: var(--color-text-secondary);">${message}</div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0;">
+          <div style="text-align: center; padding: 15px; background: var(--color-success); color: white; border-radius: 10px;">
+            <div style="font-size: 24px; font-weight: 600;">${this.score}</div>
+            <div>Correct</div>
+          </div>
+          <div style="text-align: center; padding: 15px; background: var(--color-danger); color: white; border-radius: 10px;">
+            <div style="font-size: 24px; font-weight: 600;">${this.questions.length - this.score}</div>
+            <div>Incorrect</div>
+          </div>
+          <div style="text-align: center; padding: 15px; background: var(--color-primary); color: white; border-radius: 10px;">
+            <div style="font-size: 24px; font-weight: 600;">${this.questions.length}</div>
+            <div>Total</div>
+          </div>
+        </div>
+        <button onclick="quizApp.showDetailedResults()" class="btn-secondary" style="margin-right: 10px;">View Details</button>
+        <button onclick="quizApp.generateNewQuiz()" class="btn-primary">New Quiz</button>
+      </div>
+    `;
+    
+    this.resultsContainer.classList.remove('hidden');
+    this.quizContainer.style.display = 'none';
+  }
+
+  showDetailedResults() {
+    let detailsHtml = '<div class="card"><h3>Detailed Results</h3>';
+    
+    for (let i = 0; i < this.questions.length; i++) {
+      const question = this.questions[i];
+      const userAnswer = this.userAnswers[i] || 'Not answered';
+      const isCorrect = userAnswer === question.answer;
+      
+      detailsHtml += `
+        <div style="margin-bottom: 20px; padding: 15px; border-left: 4px solid ${isCorrect ? 'var(--color-success)' : 'var(--color-danger)'}; background: var(--color-border);">
+          <div style="font-weight: 600; margin-bottom: 10px;">Question ${i + 1}: ${question.question}</div>
+          <div style="margin-bottom: 5px;">Your answer: <span style="color: ${isCorrect ? 'var(--color-success)' : 'var(--color-danger)'}; font-weight: 600;">${userAnswer}</span></div>
+          <div>Correct answer: <span style="color: var(--color-success); font-weight: 600;">${question.answer}</span></div>
+        </div>
+      `;
+    }
+    
+    detailsHtml += '<button onclick="quizApp.displayResults()" class="btn-secondary">Back to Summary</button></div>';
+    this.resultsContainer.innerHTML = detailsHtml;
+  }
+
+  async generateNewQuiz() {
+    this.resultsContainer.classList.add('hidden');
+    this.quizContainer.style.display = 'block';
+    await this.loadQuestions();
+  }
+
+  resetQuiz() {
+    if (confirm('Are you sure you want to reset the quiz? All progress will be lost.')) {
+      this.initializeQuiz();
+    }
+  }
+}
+
+// Initialize the quiz app when the page loads
+let quizApp;
+document.addEventListener('DOMContentLoaded', () => {
+  quizApp = new QuizApp();
+});

@@ -4,40 +4,66 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aadhaar Enrolment Operator Cum Supervisor Exam 2025 - Practice Quiz</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <nav class="navbar">
     <div class="nav-container">
       <h2>Aadhaar Quiz</h2>
-      <div class="nav-controls">
+      <div class="nav-icons">
         <button id="theme-toggle" class="btn-icon">🌙</button>
-        <a href="dashboard.html" class="btn-secondary">Dashboard</a>
+        <button id="menu-toggle" class="btn-icon menu-icon" title="Toggle Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <!-- Move nav-links inside nav-container -->
+      <div class="nav-links">
+        <a href="quiz-customizer.html" class="btn-secondary nav-link">Custom Quiz</a>
+        <a href="dashboard.html" class="btn-secondary nav-link">Dashboard</a>
       </div>
     </div>
   </nav>
-  
+
   <div class="container">
     <h1>Aadhaar Enrolment Operator Cum Supervisor Exam 2025 - Practice Quiz</h1>
-    
+
     <div class="progress-text">
       <span id="current-question">0</span> of <span id="total-questions">0</span> questions answered
     </div>
     <div class="progress-container">
       <div class="progress-bar" id="progress-bar"></div>
     </div>
-    
+
     <div id="quiz"></div>
-    
+
     <div class="quiz-controls">
       <button id="reset" class="btn-warning">Reset Quiz</button>
       <button id="submit" class="btn-primary">Submit Quiz</button>
     </div>
-    
+
     <div id="results" class="hidden"></div>
   </div>
-  
+
+  <script src="js/config.js"></script>
+  <script src="js/gemini-api.js"></script>
   <script src="js/quiz.js"></script>
   <script src="js/app.js"></script>
+  
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .hidden {
+      display: none !important;
+    }
+  </style>
 </body>
 </html>
