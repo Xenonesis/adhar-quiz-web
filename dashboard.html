@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Dashboard - Analytics & Results</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <h2>Quiz Dashboard</h2>
+      <div class="nav-controls">
+        <button id="theme-toggle" class="btn-icon">🌙</button>
+        <a href="index.html" class="btn-secondary">Take Quiz</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container dashboard">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-content">
+          <h3 id="total-attempts">0</h3>
+          <p>Total Attempts</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-content">
+          <h3 id="avg-score">0%</h3>
+          <p>Average Score</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-content">
+          <h3 id="best-score">0%</h3>
+          <p>Best Score</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📈</div>
+        <div class="stat-content">
+          <h3 id="improvement">0%</h3>
+          <p>Improvement</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>Score Progression</h3>
+        <canvas id="progressChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Performance Distribution</h3>
+        <canvas id="performanceChart"></canvas>
+      </div>
+    </div>
+
+    <div class="results-history">
+      <div class="section-header">
+        <h3>Recent Results</h3>
+        <button id="clear-data" class="btn-warning">Clear All Data</button>
+      </div>
+      <div id="history-list"></div>
+    </div>
+
+    <div class="topic-analysis">
+      <h3>Topic-wise Performance</h3>
+      <div id="topic-stats"></div>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
