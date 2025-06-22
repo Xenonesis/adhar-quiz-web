@@ -7,6 +7,7 @@ class QuizApp {
     this.score = 0;
     this.quizCompleted = false;
     this.geminiGenerator = null;
+    this.startTime = null;
     
     this.initializeElements();
     this.initializeEventListeners();
@@ -116,6 +117,7 @@ class QuizApp {
     this.userAnswers = [];
     this.score = 0;
     this.quizCompleted = false;
+    this.startTime = new Date();
     
     this.totalQuestionsSpan.textContent = this.questions.length;
     this.updateProgress();
@@ -237,6 +239,21 @@ class QuizApp {
       message = 'You need more practice. 📚';
     }
 
+    // Save results to localStorage for dashboard
+    this.saveQuizResult({
+      score: this.score,
+      total: this.questions.length,
+      percentage: percentage,
+      grade: grade,
+      date: new Date().toISOString(),
+      answers: this.questions.map((q, i) => ({
+        question: q.question,
+        userAnswer: this.userAnswers[i] || 'Not answered',
+        correctAnswer: q.answer,
+        correct: this.userAnswers[i] === q.answer
+      }))
+    });
+
     this.resultsContainer.innerHTML = `
       <div class="card">
         <h2>Quiz Results</h2>
@@ -261,11 +278,18 @@ class QuizApp {
         </div>
         <button onclick="quizApp.showDetailedResults()" class="btn-secondary" style="margin-right: 10px;">View Details</button>
         <button onclick="quizApp.generateNewQuiz()" class="btn-primary">New Quiz</button>
+        <a href="dashboard.html" class="btn-secondary" style="margin-left: 10px;">View Dashboard</a>
       </div>
     `;
     
     this.resultsContainer.classList.remove('hidden');
     this.quizContainer.style.display = 'none';
+  }
+
+  saveQuizResult(result) {
+    const existingResults = JSON.parse(localStorage.getItem('quizResults') || '[]');
+    existingResults.push(result);
+    localStorage.setItem('quizResults', JSON.stringify(existingResults));
   }
 
   showDetailedResults() {

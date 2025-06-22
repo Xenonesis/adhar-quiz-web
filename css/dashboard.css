@@ -179,16 +179,14 @@
 
 .history-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: var(--spacing-2);
   padding: var(--spacing-4) var(--spacing-5);
   background: rgba(76, 175, 80, 0.05);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   margin-bottom: var(--spacing-3);
   transition: all var(--transition-base);
-  flex-wrap: wrap;
-  gap: var(--spacing-3);
 }
 
 .history-item:hover {
@@ -197,10 +195,34 @@
   border-color: var(--color-primary);
 }
 
+.history-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
 .history-score {
   font-weight: 700;
   font-size: var(--font-size-lg);
   color: var(--color-primary);
+}
+
+.history-grade {
+  font-size: var(--font-size-xs);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-8);
+  color: var(--color-text-secondary);
+}
+
+.empty-state p {
+  margin-bottom: var(--spacing-4);
 }
 
 .history-date {

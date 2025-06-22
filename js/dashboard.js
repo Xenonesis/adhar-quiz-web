@@ -21,17 +21,11 @@ class QuizAnalytics {
   }
 
   initEventListeners() {
-    document.getElementById('theme-toggle').addEventListener('click', () => this.toggleTheme());
-    document.getElementById('clear-data').addEventListener('click', () => this.clearAllData());
+    const themeToggle = document.getElementById('theme-toggle');
+    const clearButton = document.getElementById('clear-data');
     
-    // Mobile menu toggle functionality
-    const menuToggle = document.getElementById('menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    if (menuToggle && navLinks) {
-      menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-      });
-    }
+    if (themeToggle) themeToggle.addEventListener('click', () => this.toggleTheme());
+    if (clearButton) clearButton.addEventListener('click', () => this.clearAllData());
   }
 
   toggleTheme() {
@@ -132,17 +126,23 @@ class QuizAnalytics {
   renderHistory() {
     const historyList = document.getElementById('history-list');
     if (this.results.length === 0) {
-      historyList.innerHTML = '<p>No quiz attempts yet. <a href="index.html">Take your first quiz!</a></p>';
+      historyList.innerHTML = '<div class="empty-state"><p>No quiz attempts yet. <a href="index.html" class="btn-primary">Take your first quiz!</a></p></div>';
       return;
     }
 
-    historyList.innerHTML = this.results.slice(-10).reverse().map((result, i) => `
+    historyList.innerHTML = this.results.slice(-10).reverse().map((result) => `
       <div class="history-item">
-        <div>
-          <div class="history-score" style="color: ${this.getScoreColor(result.percentage)}">${result.score}/${result.total} (${result.percentage}%)</div>
-          <div class="history-date">${new Date(result.date).toLocaleString()}</div>
+        <div class="history-main">
+          <div class="history-score" style="color: ${this.getScoreColor(result.percentage)}; font-weight: 600;">
+            ${result.score}/${result.total} (${result.percentage}%)
+          </div>
+          <div class="history-grade" style="background: ${this.getScoreColor(result.percentage)}; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600;">
+            ${result.grade}
+          </div>
         </div>
-        <div>Time: ${result.timeTaken || 'N/A'}</div>
+        <div class="history-date" style="color: var(--color-text-secondary); font-size: 14px;">
+          ${new Date(result.date).toLocaleDateString()} at ${new Date(result.date).toLocaleTimeString()}
+        </div>
       </div>
     `).join('');
   }
@@ -178,8 +178,8 @@ class QuizAnalytics {
     const topics = {};
     this.results.forEach(result => {
       if (result.answers) {
-        result.answers.forEach((answer, i) => {
-          const topic = this.getQuestionTopic(i);
+        result.answers.forEach((answer) => {
+          const topic = this.categorizeQuestion(answer.question);
           if (!topics[topic]) topics[topic] = { correct: 0, total: 0 };
           topics[topic].total++;
           if (answer.correct) topics[topic].correct++;
@@ -194,15 +194,25 @@ class QuizAnalytics {
     return topics;
   }
 
-  getQuestionTopic(questionIndex) {
-    const topicMap = {
-      0: 'UIDAI Basics', 1: 'Aadhaar Structure', 2: 'Eligibility', 3: 'Biometrics',
-      4: 'Age Criteria', 5: 'Equipment', 6: 'Software', 7: 'Certification',
-      8: 'Fingerprints', 9: 'Photography', 10: 'ECMP', 11: 'Forms',
-      12: 'PoI Documents', 13: 'PoA Documents', 14: 'Iris Scan', 15: 'Supervision',
-      16: 'Quality Control', 17: 'Photography Standards', 18: 'Official Website', 19: 'Authentication'
+  categorizeQuestion(question) {
+    const keywords = {
+      'Biometrics': ['biometric', 'fingerprint', 'iris', 'face', 'photo'],
+      'Documents': ['document', 'proof', 'poi', 'poa', 'identity', 'address'],
+      'UIDAI Procedures': ['uidai', 'procedure', 'process', 'enrolment', 'enrollment'],
+      'Equipment': ['equipment', 'device', 'scanner', 'camera', 'hardware'],
+      'Software': ['software', 'application', 'system', 'ecmp', 'client'],
+      'Regulations': ['regulation', 'rule', 'compliance', 'guideline', 'policy'],
+      'Authentication': ['authentication', 'verification', 'validate', 'confirm'],
+      'Quality Control': ['quality', 'standard', 'specification', 'requirement']
     };
-    return topicMap[questionIndex] || 'General';
+    
+    const lowerQuestion = question.toLowerCase();
+    for (const [topic, words] of Object.entries(keywords)) {
+      if (words.some(word => lowerQuestion.includes(word))) {
+        return topic;
+      }
+    }
+    return 'General';
   }
 
   clearAllData() {

@@ -12,15 +12,34 @@
 <body>
   <nav class="navbar">
     <div class="nav-container">
-      <h2>Custom Quiz Generator</h2>
-      <div class="nav-icons">
-        <button id="theme-toggle" class="btn-icon">🌙</button>
-      </div>
-      <div class="nav-links">
-        <a href="index.html" class="btn-secondary nav-link">Standard Quiz</a>
-        <a href="dashboard.html" class="btn-secondary nav-link">Dashboard</a>
+      <a href="index.html" class="nav-brand">
+        <div class="nav-logo">Q</div>
+        <h2>Custom Quiz Generator</h2>
+      </a>
+      <div class="nav-main">
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">
+            <span class="nav-link-icon">📋</span>
+            Standard Quiz
+          </a>
+          <a href="dashboard.html" class="nav-link">
+            <span class="nav-link-icon">📊</span>
+            Dashboard
+          </a>
+        </div>
+        <div class="nav-icons">
+          <button id="theme-toggle" class="btn-icon" title="Toggle Theme">🌙</button>
+          <button id="menu-toggle" class="btn-icon menu-icon" title="Toggle Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
+    <div class="nav-overlay" id="nav-overlay"></div>
   </nav>
 
   <div class="container">
@@ -339,6 +358,12 @@
         }
       }
 
+      saveQuizResult(result) {
+        const existingResults = JSON.parse(localStorage.getItem('quizResults') || '[]');
+        existingResults.push(result);
+        localStorage.setItem('quizResults', JSON.stringify(existingResults));
+      }
+
       displayResults() {
         const percentage = Math.round((this.score / this.questions.length) * 100);
         let grade = 'F';
@@ -360,6 +385,22 @@
           grade = 'D';
           message = 'You need more practice. 📚';
         }
+
+        // Save results to localStorage for dashboard
+        this.saveQuizResult({
+          score: this.score,
+          total: this.questions.length,
+          percentage: percentage,
+          grade: grade,
+          date: new Date().toISOString(),
+          type: 'custom',
+          answers: this.questions.map((q, i) => ({
+            question: q.question,
+            userAnswer: this.userAnswers[i] || 'Not answered',
+            correctAnswer: q.answer,
+            correct: this.userAnswers[i] === q.answer
+          }))
+        });
 
         this.resultsContainer.innerHTML = `
           <div class="card">
@@ -385,6 +426,7 @@
             </div>
             <button onclick="customQuizApp.showDetailedResults()" class="btn-secondary" style="margin-right: 10px;">View Details</button>
             <button onclick="customQuizApp.showQuizSetup()" class="btn-primary">Create New Quiz</button>
+            <a href="dashboard.html" class="btn-secondary" style="margin-left: 10px;">View Dashboard</a>
           </div>
         `;
         
