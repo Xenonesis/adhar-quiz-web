@@ -49,8 +49,19 @@
         <h1 class="hero-title">Create Amazing Quizzes</h1>
         <p class="hero-subtitle">Build custom quizzes with full customization options. Save, share, and track your quiz performance with our powerful quiz builder.</p>
         <div class="hero-buttons">
-          <a href="quiz-customizer.html" class="btn btn-primary btn-lg">Create Quiz</a>
-          <a href="saved-quizzes.html" class="btn btn-outline btn-lg">My Quizzes</a>
+          <a href="quiz-customizer.html" class="btn btn-primary btn-lg">
+            <span class="btn-icon">✏️</span>Create Quiz
+          </a>
+          <a href="saved-quizzes.html" class="btn btn-outline btn-lg">
+            <span class="btn-icon">📚</span>My Quizzes
+          </a>
+          <a href="dashboard.html" class="btn btn-outline btn-lg">
+            <span class="btn-icon">📊</span>Dashboard
+          </a>
+        </div>
+        <div class="hero-badge">
+          <span class="badge-icon">🔥</span>
+          <span class="badge-text">Try our new quiz templates!</span>
         </div>
       </div>
       <div class="hero-visual">
@@ -60,8 +71,14 @@
             <div class="quiz-question">What is your favorite color?</div>
             <div class="quiz-options">
               <div class="option">🔵 Blue</div>
-              <div class="option">🔴 Red</div>
+              <div class="option selected">🔴 Red</div>
               <div class="option">🟢 Green</div>
+            </div>
+            <div class="quiz-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 33%"></div>
+              </div>
+              <div class="progress-text">Question 1 of 3</div>
             </div>
           </div>
         </div>
@@ -142,6 +159,87 @@
       </div>
     </div>
   </section>
+  <!-- Testimonial Section -->
+  <section class="testimonial-section">
+    <div class="container">
+      <h2 class="section-title">What Our Users Say</h2>
+      <div class="testimonial-carousel">
+        <div class="testimonial-card">
+          <div class="testimonial-profile">
+            <img src="https://i.pravatar.cc/60?u=john-doe" alt="John Doe" class="profile-image" onerror="console.log('John Doe image failed to load')">
+            <div class="profile-info">
+              <div class="profile-name">John Doe</div>
+              <div class="profile-role">Teacher</div>
+            </div>
+          </div>
+          <div class="testimonial-text">
+            "I love using QuizMaster to create quizzes for my students. It's so easy to use and helps them learn better."
+          </div>
+          <div class="testimonial-rating">
+            <span class="star">⭐</span>
+            <span class="star">⭐</span>
+            <span class="star">⭐</span>
+            <span class="star">⭐</span>
+            <span class="star">⭐</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-profile">
+            <img src="https://i.pravatar.cc/60?u=jane-smith" alt="Jane Smith" class="profile-image" onerror="console.log('Jane Smith image failed to load')">
+            <div class="profile-info">
+              <div class="profile-name">Jane Smith</div>
+              <div class="profile-role">Corporate Trainer</div>
+            </div>
+          </div>
+          <div class="testimonial-text">
+            "QuizMaster has revolutionized how we conduct training sessions. The analytics feature is incredibly helpful!"
+          </div>
+          <div class="testimonial-rating">
+            <span class="star">⭐</span>
+            <span class="star">⭐</span>
+            <span class="star">⭐</span>
+            <span class="star">⭐</span>
+            <span class="star">⭐</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-profile">
+            <img src="https://i.pravatar.cc/60?u=michael-brown" alt="Michael Brown" class="profile-image" onerror="console.log('Michael Brown image failed to load')">
+            <div class="profile-info">
+              <div class="profile-name">Michael Brown</div>
+              <div class="profile-role">Student</div>
+            </div>
+          </div>
+          <div class="testimonial-text">
+            "Learning has become so much more fun with QuizMaster. I love the different quiz formats available!"
+          </div>
+          <div class="testimonial-rating">
+            <span class="star">⭐</span>
+            <span class="star">⭐</span>
+            <span class="star">⭐</span>
+            <span class="star">⭐</span>
+            <span class="star">⭐</span>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-prev" aria-label="Previous testimonial">‹</button>
+        <div class="carousel-indicators"></div>
+        <button class="carousel-next" aria-label="Next testimonial">›</button>
+      </div>
+    </div>
+  </section>
+  <!-- About Us Section -->
+  <section class="about-us">
+    <div class="container">
+      <h2 class="section-title">About Us</h2>
+      <p class="section-description">
+        QuizMaster is a powerful quiz builder that allows you to create custom quizzes with full customization options. Our mission is to help you build amazing quizzes and make learning fun and enjoyable for everyone.
+      </p>
+    </div>
+  </section>
 
   <script src="js/landing.js"></script>
   
@@ -154,5 +252,77 @@
       display: none !important;
     }
   </style>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">Q</div>
+        <h4>QuizMaster</h4>
+        <p class="footer-description">Your ultimate quiz creation platform</p>
+        <div class="social-links">
+          <a href="https://twitter.com/quizmaster" aria-label="Twitter" class="social-link">
+            <span class="social-icon">🐦</span>
+            <span class="social-text">Twitter</span>
+          </a>
+          <a href="https://facebook.com/quizmaster" aria-label="Facebook" class="social-link">
+            <span class="social-icon">👍</span>
+            <span class="social-text">Facebook</span>
+          </a>
+          <a href="https://instagram.com/quizmaster" aria-label="Instagram" class="social-link">
+            <span class="social-icon">📷</span>
+            <span class="social-text">Instagram</span>
+          </a>
+        </div>
+        <p class="copyright">&copy; 2025 QuizMaster. All rights reserved.</p>
+      </div>
+
+      <div class="footer-nav">
+        <div class="footer-nav-section">
+          <h5>Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="quiz-customizer.html" class="footer-link">Create Quiz</a></li>
+            <li><a href="saved-quizzes.html" class="footer-link">My Quizzes</a></li>
+            <li><a href="dashboard.html" class="footer-link">Dashboard</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav-section">
+          <h5>Help & Support</h5>
+          <ul class="footer-links">
+            <li><a href="faq.html" class="footer-link">FAQ</a></li>
+            <li><a href="contact.html" class="footer-link">Contact Us</a></li>
+            <li><a href="privacy.html" class="footer-link">Privacy Policy</a></li>
+            <li><a href="terms.html" class="footer-link">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-newsletter">
+        <h5>Stay Updated</h5>
+        <p class="newsletter-description">Get the latest quiz tips and updates</p>
+        <form class="newsletter-form" id="newsletterForm" novalidate>
+          <div class="form-group">
+            <input
+              type="email"
+              id="newsletterEmail"
+              placeholder="Enter your email"
+              required
+              aria-describedby="emailError"
+              class="form-input"
+              pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+            >
+            <div id="emailError" class="form-error" aria-live="polite"></div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" aria-live="polite">
+            <span class="btn-content">Subscribe</span>
+            <span class="loading hidden" aria-hidden="true"></span>
+          </button>
+          <div class="form-success hidden">Thanks for subscribing!</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

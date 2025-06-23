@@ -137,14 +137,28 @@ class QuizAnalytics {
             ${result.score}/${result.total} (${result.percentage}%)
           </div>
           <div class="history-grade" style="background: ${this.getScoreColor(result.percentage)}; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600;">
-            ${result.grade}
+            ${this.calculateGrade(result.percentage)}
           </div>
         </div>
-        <div class="history-date" style="color: var(--color-text-secondary); font-size: 14px;">
-          ${new Date(result.date).toLocaleDateString()} at ${new Date(result.date).toLocaleTimeString()}
+        <div class="history-details">
+          <div class="history-quiz-title" style="color: var(--color-text-secondary); font-size: 14px; margin-bottom: 4px;">
+            ${result.quizTitle || 'Quiz'}
+          </div>
+          <div class="history-date" style="color: var(--color-text-secondary); font-size: 14px;">
+            ${new Date(result.date).toLocaleDateString()} at ${new Date(result.date).toLocaleTimeString()}
+          </div>
         </div>
       </div>
     `).join('');
+  }
+
+  calculateGrade(percentage) {
+    if (percentage >= 90) return 'A+';
+    if (percentage >= 80) return 'A';
+    if (percentage >= 70) return 'B';
+    if (percentage >= 60) return 'C';
+    if (percentage >= 50) return 'D';
+    return 'F';
   }
 
   getScoreColor(percentage) {
@@ -177,12 +191,12 @@ class QuizAnalytics {
   analyzeTopics() {
     const topics = {};
     this.results.forEach(result => {
-      if (result.answers) {
+      if (result.answers && Array.isArray(result.answers)) {
         result.answers.forEach((answer) => {
           const topic = this.categorizeQuestion(answer.question);
           if (!topics[topic]) topics[topic] = { correct: 0, total: 0 };
           topics[topic].total++;
-          if (answer.correct) topics[topic].correct++;
+          if (answer.correct || answer.isCorrect) topics[topic].correct++;
         });
       }
     });

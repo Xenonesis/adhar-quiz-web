@@ -364,15 +364,26 @@ class SavedQuizzes {
     
     saveQuizResult() {
         const existingResults = JSON.parse(localStorage.getItem('quizResults') || '[]');
+        
+        // Calculate grade
+        let grade = 'F';
+        if (this.results.percentage >= 90) grade = 'A+';
+        else if (this.results.percentage >= 80) grade = 'A';
+        else if (this.results.percentage >= 70) grade = 'B';
+        else if (this.results.percentage >= 60) grade = 'C';
+        else if (this.results.percentage >= 50) grade = 'D';
+        
         const result = {
             quizId: this.currentQuiz.id,
             quizTitle: this.currentQuiz.title,
             score: this.results.score,
             total: this.results.total,
             percentage: this.results.percentage,
+            grade: grade,
             timeSpent: this.results.timeSpent,
             date: new Date().toISOString(),
-            type: 'custom'
+            type: 'custom',
+            answers: this.results.answers
         };
         
         existingResults.push(result);

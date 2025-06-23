@@ -285,9 +285,16 @@ class QuizPlayer {
             score: this.results.score,
             total: this.results.total,
             percentage: this.results.percentage,
+            grade: this.results.grade,
             timeSpent: this.results.timeSpent,
             date: new Date().toISOString(),
-            type: 'custom'
+            type: 'custom',
+            answers: this.userAnswers.map((userAnswer, index) => ({
+                question: this.quiz.questions[index].question,
+                userAnswer: userAnswer !== undefined ? this.quiz.questions[index].options[userAnswer] : 'Not answered',
+                correctAnswer: this.quiz.questions[index].options[this.quiz.questions[index].correctAnswer],
+                isCorrect: userAnswer === this.quiz.questions[index].correctAnswer
+            }))
         };
         
         existingResults.push(result);

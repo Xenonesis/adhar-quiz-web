@@ -4,21 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz Dashboard - Analytics & Results</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <nav class="navbar">
     <div class="nav-container">
-      <h2>Quiz Dashboard</h2>
-      <div class="nav-controls">
-        <button id="theme-toggle" class="btn-icon">🌙</button>
-        <a href="index.html" class="btn-secondary">Take Quiz</a>
+      <a href="index.html" class="nav-brand">
+        <div class="nav-logo">Q</div>
+        <h2>QuizMaster</h2>
+      </a>
+      <div class="nav-main">
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">
+            <span class="nav-link-icon">🏠</span>
+            Home
+          </a>
+          <a href="quiz-customizer.html" class="nav-link">
+            <span class="nav-link-icon">🎯</span>
+            Create Quiz
+          </a>
+          <a href="saved-quizzes.html" class="nav-link">
+            <span class="nav-link-icon">💾</span>
+            My Quizzes
+          </a>
+        </div>
+        <div class="nav-icons">
+          <button id="theme-toggle" class="btn-icon" title="Toggle Theme">🌙</button>
+          <button id="menu-toggle" class="btn-icon menu-icon" title="Toggle Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
+    <div class="nav-overlay" id="nav-overlay"></div>
   </nav>
 
-  <div class="container dashboard">
+  <div class="container">
+    <div class="page-header">
+      <h1>📈 Quiz Dashboard</h1>
+      <p>Track your quiz performance and analytics</p>
+    </div>
+
+    <div class="dashboard">
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-icon">📊</div>
@@ -72,6 +107,7 @@
     <div class="topic-analysis">
       <h3>Topic-wise Performance</h3>
       <div id="topic-stats"></div>
+    </div>
     </div>
   </div>
 

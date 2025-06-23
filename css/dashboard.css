@@ -351,3 +351,21 @@
 
 .results-history { animation-delay: 0.5s; }
 .topic-analysis { animation-delay: 0.6s; }
+
+.history-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.history-quiz-title {
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.history-date {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
