@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Saved Quizzes - QuizMaster</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="nav-logo">Q</div>
+        <h2>QuizMaster</h2>
+      </a>
+      <div class="nav-main">
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">
+            <span class="nav-link-icon">🏠</span>
+            Home
+          </a>
+          <a href="quiz-customizer.html" class="nav-link">
+            <span class="nav-link-icon">🎯</span>
+            Create Quiz
+          </a>
+          <a href="dashboard.html" class="nav-link">
+            <span class="nav-link-icon">📊</span>
+            Dashboard
+          </a>
+        </div>
+        <div class="nav-icons">
+          <button id="theme-toggle" class="btn-icon" title="Toggle Theme">🌙</button>
+          <button id="menu-toggle" class="btn-icon menu-icon" title="Toggle Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="nav-overlay" id="nav-overlay"></div>
+  </nav>
+
+  <div class="container">
+    <div class="page-header">
+      <h1>📚 My Saved Quizzes</h1>
+      <p>Access and manage all your custom quizzes</p>
+      <div class="header-actions">
+        <a href="quiz-customizer.html" class="btn btn-primary">+ Create New Quiz</a>
+        <button id="clear-all" class="btn btn-danger">Clear All</button>
+      </div>
+    </div>
+
+    <!-- Search and Filter -->
+    <div class="quiz-controls-bar">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Search quizzes..." class="search-input">
+        <span class="search-icon">🔍</span>
+      </div>
+      <div class="filter-controls">
+        <select id="category-filter" class="filter-select">
+          <option value="">All Categories</option>
+          <option value="general">General Knowledge</option>
+          <option value="science">Science</option>
+          <option value="history">History</option>
+          <option value="technology">Technology</option>
+          <option value="sports">Sports</option>
+          <option value="entertainment">Entertainment</option>
+          <option value="custom">Custom</option>
+        </select>
+        <select id="difficulty-filter" class="filter-select">
+          <option value="">All Difficulties</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+        <select id="sort-by" class="filter-select">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="title">Title A-Z</option>
+          <option value="category">Category</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Quiz Grid -->
+    <div id="quizzes-grid" class="quizzes-grid">
+      <!-- Quizzes will be loaded here -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="empty-state" style="display: none;">
+      <div class="empty-icon">📝</div>
+      <h3>No Quizzes Found</h3>
+      <p>You haven't created any quizzes yet. Start building your first quiz!</p>
+      <a href="quiz-customizer.html" class="btn btn-primary">Create Your First Quiz</a>
+    </div>
+
+    <!-- No Results State -->
+    <div id="no-results" class="empty-state" style="display: none;">
+      <div class="empty-icon">🔍</div>
+      <h3>No Results Found</h3>
+      <p>Try adjusting your search or filter criteria.</p>
+      <button onclick="savedQuizzes.clearFilters()" class="btn btn-secondary">Clear Filters</button>
+    </div>
+  </div>
+
+  <!-- Quiz Player Modal -->
+  <div id="quiz-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-quiz-title">Quiz Title</h2>
+        <button class="modal-close" onclick="savedQuizzes.closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="quiz-player">
+          <!-- Quiz content will be loaded here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/saved-quizzes.js"></script>
+</body>
+</html>

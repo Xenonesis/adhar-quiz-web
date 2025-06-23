@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Quiz Builder - QuizMaster</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="nav-logo">Q</div>
+        <h2>QuizMaster</h2>
+      </a>
+      <div class="nav-main">
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">
+            <span class="nav-link-icon">🏠</span>
+            Home
+          </a>
+          <a href="saved-quizzes.html" class="nav-link">
+            <span class="nav-link-icon">💾</span>
+            My Quizzes
+          </a>
+          <a href="dashboard.html" class="nav-link">
+            <span class="nav-link-icon">📊</span>
+            Dashboard
+          </a>
+        </div>
+        <div class="nav-icons">
+          <button id="theme-toggle" class="btn-icon" title="Toggle Theme">🌙</button>
+          <button id="menu-toggle" class="btn-icon menu-icon" title="Toggle Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="nav-overlay" id="nav-overlay"></div>
+  </nav>
+
+  <div class="container">
+    <div class="quiz-builder-header">
+      <h1>🎯 Custom Quiz Builder</h1>
+      <p>Create your perfect quiz with full customization options</p>
+    </div>
+
+    <!-- Quiz Builder Form -->
+    <div id="quiz-builder" class="quiz-builder-container">
+      <div class="builder-section">
+        <h3>📝 Quiz Details</h3>
+        <div class="form-group">
+          <label for="quiz-title">Quiz Title</label>
+          <input type="text" id="quiz-title" placeholder="Enter your quiz title" class="form-input">
+        </div>
+        <div class="form-group">
+          <label for="quiz-description">Description (Optional)</label>
+          <textarea id="quiz-description" placeholder="Brief description of your quiz" class="form-textarea"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="quiz-category">Category</label>
+            <select id="quiz-category" class="form-select">
+              <option value="general">General Knowledge</option>
+              <option value="science">Science</option>
+              <option value="history">History</option>
+              <option value="technology">Technology</option>
+              <option value="sports">Sports</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="custom">Custom Category</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="quiz-difficulty">Difficulty</label>
+            <select id="quiz-difficulty" class="form-select">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" id="custom-category-group" style="display: none;">
+          <label for="custom-category">Custom Category Name</label>
+          <input type="text" id="custom-category" placeholder="Enter custom category" class="form-input">
+        </div>
+        <div class="form-group">
+          <label for="question-count">Number of Questions</label>
+          <input type="number" id="question-count" value="20" min="5" max="150" class="form-input">
+          <small>Choose between 5-150 questions (default: 20)</small>
+        </div>
+        <div class="ai-generation">
+          <p class="ai-note">Click "Save & Generate" to create and save your quiz with AI-generated questions</p>
+        </div>
+        
+        <!-- Questions Container for manual questions (if needed) -->
+        <div id="questions-container" style="display: none;">
+          <!-- Manual questions would go here -->
+        </div>
+      </div>
+
+      <div class="builder-section">
+        <h3>🎨 Customization</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="quiz-theme">Theme</label>
+            <select id="quiz-theme" class="form-select">
+              <option value="default">Default</option>
+              <option value="dark">Dark Mode</option>
+              <option value="colorful">Colorful</option>
+              <option value="minimal">Minimal</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="time-limit">Time Limit (minutes)</label>
+            <select id="time-limit" class="form-select">
+              <option value="0">No Limit</option>
+              <option value="5">5 minutes</option>
+              <option value="10">10 minutes</option>
+              <option value="15">15 minutes</option>
+              <option value="30">30 minutes</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="show-correct-answers" checked> Show correct answers after completion
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="randomize-questions"> Randomize question order
+          </label>
+        </div>
+      </div>
+
+      <div class="builder-actions">
+        <button id="preview-quiz" class="btn btn-secondary">👁️ Preview</button>
+        <button id="save-generate-quiz" class="btn btn-primary">💾 Save & Generate</button>
+      </div>
+    </div>
+
+    <!-- Quiz Preview/Play Mode -->
+    <div id="quiz-preview" class="quiz-preview-container" style="display: none;">
+      <div class="quiz-header">
+        <h2 id="preview-title">Quiz Preview</h2>
+        <div class="quiz-meta">
+          <span id="preview-category"></span>
+          <span id="preview-difficulty"></span>
+          <span id="preview-time"></span>
+        </div>
+      </div>
+      
+      <div class="progress-text" id="progress-text">
+        <span id="current-question">0</span> of <span id="total-questions">0</span> questions
+      </div>
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+
+      <div id="quiz-content"></div>
+
+      <div class="quiz-controls">
+        <button id="prev-question" class="btn btn-secondary">← Previous</button>
+        <button id="next-question" class="btn btn-primary">Next →</button>
+        <button id="finish-quiz" class="btn btn-success" style="display: none;">Finish Quiz</button>
+      </div>
+      
+      <div class="quiz-actions">
+        <button id="back-to-builder" class="btn btn-outline">← Back to Builder</button>
+        <button id="save-and-exit" class="btn btn-secondary">Save & Exit</button>
+      </div>
+    </div>
+
+    <!-- Quiz Results -->
+    <div id="quiz-results" class="quiz-results-container" style="display: none;">
+      <!-- Results will be displayed here -->
+    </div>
+  </div>
+
+  <script src="js/gemini-quiz-generator.js"></script>
+  <script src="js/quiz-builder-updated.js"></script>
+  
+  <script>
+    // Additional custom functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Handle custom category display
+      const categorySelect = document.getElementById('quiz-category');
+      const customCategoryGroup = document.getElementById('custom-category-group');
+      
+      if (categorySelect && customCategoryGroup) {
+        categorySelect.addEventListener('change', function() {
+          customCategoryGroup.style.display = this.value === 'custom' ? 'block' : 'none';
+        });
+      }
+      
+      // Handle question count display update
+      const questionCountInput = document.getElementById('question-count');
+      const aiNote = document.querySelector('.ai-note');
+      
+      if (questionCountInput && aiNote) {
+        questionCountInput.addEventListener('input', function() {
+          const count = this.value;
+          aiNote.textContent = `Click "Save & Generate" to create and save your quiz with ${count} AI-generated questions`;
+        });
+      }
+    });
+  </script>
+  
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</body>
+</html>
