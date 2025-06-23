@@ -5,6 +5,11 @@
 @import url('base.css');
 @import url('components.css');
 @import url('dashboard.css');
+@import url('landing.css');
+@import url('quiz-builder.css');
+@import url('saved-quizzes.css');
+@import url('play-quiz.css');
+@import url('dashboard-enhanced.css');
 @import url('responsive.css');
 
 /* Additional utility classes and overrides */

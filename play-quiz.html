@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Play Quiz - QuizMaster</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="nav-logo">Q</div>
+        <h2>QuizMaster</h2>
+      </a>
+      <div class="nav-main">
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">
+            <span class="nav-link-icon">🏠</span>
+            Home
+          </a>
+          <a href="saved-quizzes.html" class="nav-link">
+            <span class="nav-link-icon">💾</span>
+            My Quizzes
+          </a>
+        </div>
+        <div class="nav-icons">
+          <button id="theme-toggle" class="btn-icon" title="Toggle Theme">🌙</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="quiz-player">
+      <div class="quiz-header">
+        <h1 id="quiz-title">Quiz Title</h1>
+        <div class="quiz-meta">
+          <span id="quiz-category">Category</span>
+          <span id="quiz-difficulty">Difficulty</span>
+          <span id="quiz-timer" style="display: none;">Time: <span id="time-remaining">00:00</span></span>
+        </div>
+      </div>
+      
+      <div class="progress-section">
+        <div class="progress-text">
+          Question <span id="current-question">1</span> of <span id="total-questions">10</span>
+        </div>
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+
+      <div class="question-section">
+        <div class="question-card">
+          <div class="question-text" id="question-text">
+            Loading question...
+          </div>
+          <div class="answer-options" id="answer-options">
+            <!-- Options will be loaded here -->
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-controls">
+        <button id="prev-btn" class="btn btn-secondary" disabled>← Previous</button>
+        <button id="next-btn" class="btn btn-primary">Next →</button>
+        <button id="finish-btn" class="btn btn-success" style="display: none;">Finish Quiz</button>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results-section" class="results-section" style="display: none;">
+      <div class="results-card">
+        <div class="results-header">
+          <div class="results-score" id="final-score">85%</div>
+          <div class="results-grade" id="final-grade">B+</div>
+          <div class="results-message" id="results-message">Good job!</div>
+        </div>
+        
+        <div class="results-stats">
+          <div class="stat-item">
+            <div class="stat-number" id="correct-count">8</div>
+            <div class="stat-label">Correct</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" id="incorrect-count">2</div>
+            <div class="stat-label">Incorrect</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" id="total-count">10</div>
+            <div class="stat-label">Total</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" id="time-taken">05:30</div>
+            <div class="stat-label">Time</div>
+          </div>
+        </div>
+
+        <div class="results-actions">
+          <button id="review-answers" class="btn btn-secondary">Review Answers</button>
+          <button id="play-again" class="btn btn-primary">Play Again</button>
+          <a href="saved-quizzes.html" class="btn btn-outline">Back to Quizzes</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review Section -->
+    <div id="review-section" class="review-section" style="display: none;">
+      <div class="review-header">
+        <h2>Answer Review</h2>
+        <button id="back-to-results" class="btn btn-secondary">← Back to Results</button>
+      </div>
+      <div id="review-content">
+        <!-- Review content will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="js/play-quiz.js"></script>
+</body>
+</html>
