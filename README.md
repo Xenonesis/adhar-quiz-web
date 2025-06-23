@@ -127,6 +127,7 @@
 | **Chart.js** | Data Visualization | 3.x |
 | **LocalStorage** | Data Persistence | Browser API |
 | **Fetch API** | AI Integration | Native |
+| **Version** | Current Version | 3.0 |
 
 ---
 
