@@ -98,13 +98,19 @@
 <div align="center">
 
 ### 🌅 Light Mode
-![Light Mode Quiz](https://via.placeholder.com/800x400/667eea/ffffff?text=Light+Mode+Quiz+Interface)
+- Clean, bright interface with subtle gradients
+- Easy-to-read typography and clear visual hierarchy
+- Modern glassmorphism design elements
 
 ### 🌙 Dark Mode
-![Dark Mode Quiz](https://via.placeholder.com/800x400/1a1a2e/ffffff?text=Dark+Mode+Quiz+Interface)
+- Comfortable dark theme for extended use
+- Reduced eye strain with proper contrast ratios
+- Accent colors that pop against dark backgrounds
 
 ### 📊 Analytics Dashboard
-![Dashboard](https://via.placeholder.com/800x400/4CAF50/ffffff?text=Analytics+Dashboard)
+- Interactive charts showing quiz performance
+- Detailed breakdown of correct/incorrect answers
+- Progress tracking over time with visual trends
 
 </div>
 
